@@ -1,0 +1,67 @@
+Задача 1
+https://jsfiddle.net/uqhmL4ad/26/
+/* 
+const arr = [‘A’, ‘B’, ‘C’, ‘D’, ‘E’, ‘F’, ‘G’, ‘H’];
+
+В массиве берется произвольный элемент и перемещается на произвольную позицию. Нужна функция move(array, from, to), которая это осуществляет.
+
+Пример:
+move(arr, 0, 3)  // [B’, ‘C’, ‘D’, ‘A’, ‘E’, ‘F’, ‘G’, ‘H’];
+
+
+*/
+
+const arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+
+function move(array, from, to){
+
+	//проверим входные параметры
+  //является ли arr массивом
+  if(!Array.isArray(array)){
+  	throw new Error("Вы передали не массив")
+  }
+  //являются ли from и to не отрицательными числами
+  if(typeof(from)!='number'){
+  	throw new Error("Вы передали неверные параметры позици первого элемента")
+  }
+  if(typeof(to)!='number'){
+  	throw new Error("Вы передали неверные параметры позици второго элемента")
+  }
+  if(from<0){
+  	throw new Error("Вы передали отрицательное значение позици первого элемента")
+  }
+  if(to<0){
+  	throw new Error("Вы передали отрицательное значение позици второго элемента")
+  }
+  
+	let targetObject = array[from]
+  
+	// первый вариант создаем несколько массивов и потом их соединяем
+	let result = []
+  let arrBeforeFrom = (from !=0) ? array.slice(0, from) : []
+  let arrMiddle = array.slice(from+1, to+1)
+  let arrAfterTo = (to!=array.lenght) ? array.slice(to+1, array.lenght) : []
+  
+  return result.concat(arrBeforeFrom, arrMiddle, targetObject, arrAfterTo)
+}
+
+console.log(move(arr, 0 , 3))
+console.log(move(arr, 1 , 4))
+try{
+	console.log(move(arr, 'a' , 4))
+}catch(e){
+	console.log(e.message)
+}
+try{
+	console.log(move(arr, 4, 'a'))
+}catch(e){
+	console.log(e.message)
+}
+try{
+	console.log(move({ name : "Я не массив"}, 4, 'a'))
+}catch(e){
+	console.log(e.message)
+}
+
+
+

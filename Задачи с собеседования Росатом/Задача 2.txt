@@ -1,0 +1,53 @@
+Задача 2
+https://jsfiddle.net/82fmcxae/6/
+
+/* 
+Есть функция doJob(task), которая что-то делает. Как только она начинает работу, она становится занята (busy) и не обрабатывает новые запросы. Ей на вход без перерыва поступают задачи task, причем, если функция занята, при ее освобождении ей необходимо будет выполнить ПОСЛЕДНЮЮ из поступивших задач в момент ее занятости. Написать враппер, который будет это реализовывать.
+    - Поступила задача А
+    - doJob стала busy
+    - Поступили задачи Б, Ц, Д
+    - doJob освободилась
+    - doJob взяла задачу Д
+*/
+
+let busy = false
+let tasks = []
+
+function doJob(task){
+	return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(task);
+    }, 3000);
+  });
+}
+
+async function wrapperDoJob(task){
+	//проверим есть ли еще задание
+	if(!task){
+  	if(tasks.length>0){
+    	task = tasks.pop()
+    }else{ 
+    	return
+    }
+  }
+	// если функция занята то надо поставить задание в очередь и выйти
+  if(busy == true){
+  		tasks.push(task)
+      return
+  }
+  //иначе блокируем вызов функции выполняем задание
+  busy = true
+  let result =  await doJob(task)
+  busy = false 
+  wrapperDoJob() //вызовем обертку для того что бы она выполнила task, которые могли попасть в список задач
+  console.log(result)
+  return result
+}
+wrapperDoJob('А')
+wrapperDoJob('Б')
+wrapperDoJob('Ц')
+wrapperDoJob('Д')
+setTimeout(()=>{
+	wrapperDoJob('Задача после Д, которая была добавлена уже после попадания Б Ц Д ')
+}, 4000)
+
