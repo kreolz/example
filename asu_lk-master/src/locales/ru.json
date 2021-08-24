@@ -1,0 +1,12 @@
+{
+  "app": "Поступающий",
+  "loginTitle": "Вход",
+  "login": "Войти",
+  "registrationTitle": "Регистрация",
+  "registration": "Зарегистрироваться",
+  "enrollee": {
+    "registrationNextBtn": "Продолжить",
+    "registrationBackBtn": "Назад",
+    "registrationCompleteBtn": "Завершить регистрацию"
+  }
+}

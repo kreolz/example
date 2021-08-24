@@ -1,0 +1,20 @@
+{
+  "name": "Приемная комиссия Рубцовского института (филиала) АлтГУ",
+  "short_name": "Приемная комиссия",
+  "icons": [
+    {
+      "src": "./img/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./img/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "192.168.1.214:8080/",
+  "display": "standalone",
+  "background_color": "#1976d2",
+  "theme_color": "#4DBA87"
+}
